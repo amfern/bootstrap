@@ -45,6 +45,7 @@ angular.module('ui.bootstrap.typeahead', [])
 
       //expressions used by typeahead
       var parserResult = typeaheadParser.parse(attrs.typeahead);
+      var persistent = originalScope.$eval(attrs.typeaheadPersistent);
 
       //create a child scope for the typeahead directive so we are not polluting original scope
       //with typeahead-specific data (matches, query etc.)
@@ -106,6 +107,9 @@ angular.module('ui.bootstrap.typeahead', [])
             getMatchesAsync(inputValue);
           }
         }
+
+        if(persistent)
+          return inputValue;
 
         return undefined;
       });
